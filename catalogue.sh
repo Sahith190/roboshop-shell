@@ -29,16 +29,15 @@ VALIDATE(){
 
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOGFILE
 
-VALIDATE $? "Setting up NPM source"
+VALIDATE $? "Setting up NPM Source"
 
 yum install nodejs -y &>>$LOGFILE
 
-VALIDATE $? "Installing nodeJS"
+VALIDATE $? "Installing NodeJS"
 
 #once the user is created, if you run this script 2nd time
 # this command will defnitely fail
 # IMPROVEMENT: first check the user already exist or not, if not exist then create
-
 useradd roboshop &>>$LOGFILE
 
 #write a condition to check directory already exist or not
@@ -46,7 +45,7 @@ mkdir /app &>>$LOGFILE
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>$LOGFILE
 
-VALIDATE $? "Downloading catalogue artifact"
+VALIDATE $? "downloading catalogue artifact"
 
 cd /app &>>$LOGFILE
 
@@ -60,6 +59,7 @@ npm install &>>$LOGFILE
 
 VALIDATE $? "Installing dependencies"
 
+# give full path of catalogue.service because we are inside /app
 cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>>$LOGFILE
 
 VALIDATE $? "copying catalogue.service"
@@ -74,9 +74,9 @@ VALIDATE $? "Enabling Catalogue"
 
 systemctl start catalogue &>>$LOGFILE
 
-VALIDATE $? "Start Catalogue"
+VALIDATE $? "Starting Catalogue"
 
-cp /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
+cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 
 VALIDATE $? "Copying mongo repo"
 
@@ -84,11 +84,6 @@ yum install mongodb-org-shell -y &>>$LOGFILE
 
 VALIDATE $? "Installing mongo client"
 
-mongo --host mongodb.sahith.online </app/schema/catalogue.js &>>$LOGFILE
+mongo --host mongodb.joindevops.online </app/schema/catalogue.js &>>$LOGFILE
 
 VALIDATE $? "loading catalogue data into mongodb"
-
-
-
-
-
