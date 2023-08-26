@@ -45,7 +45,7 @@ mkdir /app &>>$LOGFILE
 
 curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip &>>$LOGFILE
 
-VALIDATE $? "downloading user artifact"
+VALIDATE $? "downloaded user artifact"
 
 cd /app &>>$LOGFILE
 
