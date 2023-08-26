@@ -35,6 +35,7 @@ useradd roboshop &>>$LOGFILE
 
 if id "$?" >/dev/null 2>&1; then
     echo "User exists"
+    exit 1
 else
     echo "User does not exist"
 fi
