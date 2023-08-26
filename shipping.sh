@@ -33,7 +33,17 @@ VALIDATE $? "Installing Maven"
 
 useradd roboshop &>>$LOGFILE
 
+
+
 mkdir /app &>>$LOGFILE
+
+if [ -d "/path/to/dir" ] 
+then
+    echo "Directory /path/to/dir exists." 
+    exit 1
+else
+    echo "Error: Directory /path/to/dir does not exists."
+fi
 
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping.zip &>>$LOGFILE
 
